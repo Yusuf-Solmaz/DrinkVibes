@@ -1,6 +1,7 @@
 package com.yusuf.drinkvibes.data.retrofit.entity
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class Moods(
 
@@ -9,4 +10,4 @@ data class Moods(
 
     @SerializedName("moodName")
     val moodName: String
-)
+) : Serializable

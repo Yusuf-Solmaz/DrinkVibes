@@ -1,6 +1,7 @@
 package com.yusuf.drinkvibes.data.retrofit.entity
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class Beverages(
 
@@ -24,4 +25,4 @@ data class Beverages(
 
     @SerializedName("youtubeVideoId")
     val youtubeVideoId: String
-)
+) : Serializable
