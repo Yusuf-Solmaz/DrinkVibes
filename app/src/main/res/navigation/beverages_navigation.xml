@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/beverages_navigation"
+    app:startDestination="@id/moodsFragment">
+
+    <fragment
+        android:id="@+id/moodsFragment"
+        android:name="com.yusuf.drinkvibes.ui.MoodsFragment"
+        android:label="fragment_moods"
+        tools:layout="@layout/fragment_moods" >
+        <action
+            android:id="@+id/action_moodsFragment_to_beveragesFragment"
+            app:destination="@id/beveragesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/beveragesFragment"
+        android:name="com.yusuf.drinkvibes.ui.BeveragesFragment"
+        android:label="fragment_beverages"
+        tools:layout="@layout/fragment_beverages" >
+        <argument
+            android:name="mood"
+            app:argType="com.yusuf.drinkvibes.data.retrofit.entity.Moods" />
+    </fragment>
+</navigation>
