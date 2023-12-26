@@ -2,6 +2,7 @@ package com.yusuf.drinkvibes.di
 
 import com.yusuf.drinkvibes.data.retrofit.api.BeveragesApi
 import com.yusuf.drinkvibes.data.retrofit.api.MoodsApi
+import com.yusuf.drinkvibes.data.retrofit.entity.Moods
 import com.yusuf.drinkvibes.data.retrofit.repository.BeveragesRepository
 import com.yusuf.drinkvibes.data.retrofit.repository.MoodsRepository
 import com.yusuf.drinkvibes.utils.Utils.Companion.BASE_URL
@@ -17,6 +18,8 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 class AppModule {
+
+
 
     @Provides
     @Singleton

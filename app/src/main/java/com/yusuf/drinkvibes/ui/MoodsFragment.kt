@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.ProgressBar
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.yusuf.drinkvibes.R
 import com.yusuf.drinkvibes.databinding.FragmentMoodsBinding
 import com.yusuf.drinkvibes.databinding.MoodsRowBinding
@@ -47,8 +48,30 @@ class MoodsFragment : Fragment() {
 
         viewModel.getAllMoods()
 
+
+
+        loadData()
+
+
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.getAllMoods()
+    }
+
+    private fun loadData(){
         viewModel.moodList.observe(viewLifecycleOwner){
-            moods->
+                moods->
+            moods?.let {
+                adapter = MoodsAdapter(viewModel,requireContext(),moods)
+                binding.moodRecyclerView.adapter = adapter
+            }
+        }
+
+        viewModel.moodList.observe(viewLifecycleOwner){
+                moods->
             moods?.let {
                 adapter = MoodsAdapter(viewModel,requireContext(),moods)
                 binding.moodRecyclerView.adapter = adapter
@@ -56,19 +79,16 @@ class MoodsFragment : Fragment() {
         }
 
         viewModel.loading.observe(viewLifecycleOwner){
-            loading ->
+                loading ->
             if (loading){
                 binding.progressBar.visibility=ProgressBar.VISIBLE
+                binding.moodRecyclerView.visibility=RecyclerView.INVISIBLE
             }
             else{
                 binding.progressBar.visibility=ProgressBar.INVISIBLE
+                binding.moodRecyclerView.visibility=RecyclerView.VISIBLE
             }
         }
-    }
-
-    override fun onResume() {
-        super.onResume()
-        viewModel.getAllMoods()
     }
 
 }
