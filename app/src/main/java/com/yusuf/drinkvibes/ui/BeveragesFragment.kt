@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -69,6 +70,7 @@ class BeveragesFragment : Fragment() {
 
                 val favBeverage = FavouriteBeverages(beverage.id,beverage.beverageName,beverage.contents,beverage.imageUrl,beverage.mood,beverage.preparation,beverage.youtubeVideoId)
                 viewModel.saveFavBeverages(favBeverage)
+                Toast.makeText(context,"${beverage.beverageName} Added to Favourites", Toast.LENGTH_SHORT).show()
             }
 
             binding.beverageContents.text = beverage.contents
@@ -87,7 +89,7 @@ class BeveragesFragment : Fragment() {
             binding.webView.settings.domStorageEnabled = true
 
 
-            val videoId = beverage.youtubeVideoId // YouTube video ID'sini buraya yazın
+            val videoId = beverage.youtubeVideoId
             val embedHTML = "<html><body><iframe width=\"100%\" height=\"100%\" src=\"https://www.youtube.com/embed/$videoId\" frameborder=\"0\" allowfullscreen></iframe></body></html>"
             binding.webView.loadData(embedHTML, "text/html", "utf-8")
 

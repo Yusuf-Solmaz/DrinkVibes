@@ -16,9 +16,11 @@ class FavouriteBeveragesViewModel @Inject constructor(val repo: FavouriteBeverag
     var favouriteBeverages = MutableLiveData<List<FavouriteBeverages>>()
 
     fun getAllFavouriteBeverages(){
-
             favouriteBeverages.value = repo.getAllFavouriteBeverages()
+    }
 
-
+    fun deleteBeverage(beverages: FavouriteBeverages){
+        repo.deleteBeverage(beverages)
+        getAllFavouriteBeverages()
     }
 }

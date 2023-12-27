@@ -14,4 +14,8 @@ class FavouriteBeveragesRepository(var favBeveraegsDao: FavouriteBeveragesDao) {
         favBeveraegsDao.addFavouriteBeverage(favouriteBeverages)
     }
 
+    fun deleteBeverage(favouriteBeverages: FavouriteBeverages){
+        favBeveraegsDao.deleteFavouriteBeverage(favouriteBeverages)
+    }
+
 }

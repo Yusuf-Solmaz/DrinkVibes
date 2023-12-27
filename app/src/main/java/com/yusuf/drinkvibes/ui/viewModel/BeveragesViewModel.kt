@@ -63,7 +63,6 @@ class BeveragesViewModel @Inject constructor(val repo: BeveragesRepository,val f
     }
 
     fun saveFavBeverages(favbeverage: FavouriteBeverages){
-
             favRepo.addFavouriteBeverage(favbeverage)
             Log.i("favBeverage",favbeverage.toString())
 

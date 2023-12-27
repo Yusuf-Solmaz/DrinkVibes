@@ -3,10 +3,12 @@ package com.yusuf.drinkvibes.ui.adapter
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.yusuf.drinkvibes.data.roomdb.entity.FavouriteBeverages
+import com.yusuf.drinkvibes.data.roomdb.repo.FavouriteBeveragesRepository
 import com.yusuf.drinkvibes.databinding.FavBeveragesRowBinding
 import com.yusuf.drinkvibes.ui.viewModel.FavouriteBeveragesViewModel
 
@@ -35,5 +37,10 @@ class FavouriteBeveragesAdapter(val viewModel: FavouriteBeveragesViewModel,val c
             // .placeholder(R.drawable.img)
             .transition(DrawableTransitionOptions.withCrossFade())
             .into(holder.binding.imageView)
+
+        holder.binding.deleteBeverageIcon.setOnClickListener {
+            viewModel.deleteBeverage(favBeveragesList[position])
+            Toast.makeText(context,"${favBeveragesList[position].beverageName} Deleted",Toast.LENGTH_SHORT).show()
+        }
     }
 }

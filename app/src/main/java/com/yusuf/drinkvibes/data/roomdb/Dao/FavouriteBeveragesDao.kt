@@ -1,6 +1,7 @@
 package com.yusuf.drinkvibes.data.roomdb.Dao
 
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
@@ -15,4 +16,7 @@ interface FavouriteBeveragesDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun addFavouriteBeverage(beverages: FavouriteBeverages)
+
+    @Delete
+    fun deleteFavouriteBeverage(beverages: FavouriteBeverages)
 }
