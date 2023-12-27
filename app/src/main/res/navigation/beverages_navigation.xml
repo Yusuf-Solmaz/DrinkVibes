@@ -22,5 +22,13 @@
         <argument
             android:name="mood"
             app:argType="com.yusuf.drinkvibes.data.retrofit.entity.Moods" />
+        <action
+            android:id="@+id/action_beveragesFragment_to_favouriteBeveragesFragment"
+            app:destination="@id/favouriteBeveragesFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/favouriteBeveragesFragment"
+        android:name="com.yusuf.drinkvibes.ui.FavouriteBeveragesFragment"
+        android:label="fragment_favourite_beverages"
+        tools:layout="@layout/fragment_favourite_beverages" />
 </navigation>
