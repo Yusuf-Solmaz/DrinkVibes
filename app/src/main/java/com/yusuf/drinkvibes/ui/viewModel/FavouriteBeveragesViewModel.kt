@@ -16,9 +16,9 @@ class FavouriteBeveragesViewModel @Inject constructor(val repo: FavouriteBeverag
     var favouriteBeverages = MutableLiveData<List<FavouriteBeverages>>()
 
     fun getAllFavouriteBeverages(){
-        viewModelScope.launch {
+
             favouriteBeverages.value = repo.getAllFavouriteBeverages()
-        }
+
 
     }
 }

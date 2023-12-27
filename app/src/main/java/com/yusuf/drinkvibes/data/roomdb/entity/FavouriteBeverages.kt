@@ -11,30 +11,23 @@ data class FavouriteBeverages(
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
-    @NotNull
-    var id: Int,
+    var id: Int = 0,
 
     @ColumnInfo(name = "beverageName")
-    @NotNull
-    var beverageName: String,
+    var beverageName: String ="",
 
     @ColumnInfo(name = "contents")
-    @NotNull
-    var contents: String,
+    var contents: String ="",
 
     @ColumnInfo(name = "imageUrl")
-    @NotNull
-    var imageUrl: String,
+    var imageUrl: String ="",
 
     @ColumnInfo(name = "mood")
-    @NotNull
-    var mood: String,
+    var mood: String ="",
 
     @ColumnInfo(name = "preparation")
-    @NotNull
-    var preparation: String,
+    var preparation: String ="",
 
     @ColumnInfo(name = "youtubeVideoId")
-    @NotNull
-    var youtubeVideoId: String
-) : Serializable
+    var youtubeVideoId: String =""
+)
