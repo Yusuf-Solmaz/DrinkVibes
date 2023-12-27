@@ -11,11 +11,13 @@ import android.webkit.WebViewClient
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.yusuf.drinkvibes.R
 import com.yusuf.drinkvibes.data.retrofit.entity.Moods
+import com.yusuf.drinkvibes.data.roomdb.entity.FavouriteBeverages
 import com.yusuf.drinkvibes.databinding.FragmentBeveragesBinding
 import com.yusuf.drinkvibes.ui.viewModel.BeveragesViewModel
 import com.yusuf.drinkvibes.ui.viewModel.MoodsViewModel
@@ -47,6 +49,7 @@ class BeveragesFragment : Fragment() {
         viewModel = ViewModelProvider(this).get(BeveragesViewModel::class.java)
 
 
+
     }
 
     override fun onResume() {
@@ -54,11 +57,19 @@ class BeveragesFragment : Fragment() {
 
         val bundle : BeveragesFragmentArgs by navArgs()
         val mood = bundle.mood
-
         viewModel.getBeverages(mood)
+
         viewModel.beverageList.observe(viewLifecycleOwner){
 
             val beverage = it[Random.nextInt(it.size)]
+
+            binding.isFav.setOnClickListener {
+                val action = BeveragesFragmentDirections.actionBeveragesFragmentToFavouriteBeveragesFragment()
+                findNavController().navigate(action)
+
+                val favBeverage = FavouriteBeverages(beverage.id,beverage.beverageName,beverage.contents,beverage.imageUrl,beverage.mood,beverage.preparation,beverage.youtubeVideoId)
+                viewModel.saveFavBeverages(favBeverage)
+            }
 
             binding.beverageContents.text = beverage.contents
             binding.beveragePreparation.text = beverage.preparation

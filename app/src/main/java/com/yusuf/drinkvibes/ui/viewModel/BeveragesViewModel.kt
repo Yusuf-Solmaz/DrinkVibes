@@ -1,17 +1,20 @@
 package com.yusuf.drinkvibes.ui.viewModel
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.yusuf.drinkvibes.data.retrofit.entity.Beverages
 import com.yusuf.drinkvibes.data.retrofit.entity.Moods
 import com.yusuf.drinkvibes.data.retrofit.repository.BeveragesRepository
+import com.yusuf.drinkvibes.data.roomdb.entity.FavouriteBeverages
+import com.yusuf.drinkvibes.data.roomdb.repo.FavouriteBeveragesRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class BeveragesViewModel @Inject constructor(val repo: BeveragesRepository) : ViewModel() {
+class BeveragesViewModel @Inject constructor(val repo: BeveragesRepository,val favRepo:FavouriteBeveragesRepository) : ViewModel() {
 
     var beverageList = MutableLiveData<List<Beverages>>()
     var loading = MutableLiveData<Boolean>()
@@ -56,6 +59,13 @@ class BeveragesViewModel @Inject constructor(val repo: BeveragesRepository) : Vi
 
             }
         }
+
+    }
+
+    fun saveFavBeverages(favbeverage: FavouriteBeverages){
+
+            favRepo.addFavouriteBeverage(favbeverage)
+            Log.i("favBeverage",favbeverage.toString())
 
     }
 }

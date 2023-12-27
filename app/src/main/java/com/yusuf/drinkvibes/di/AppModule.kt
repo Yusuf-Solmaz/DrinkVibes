@@ -4,11 +4,11 @@ import android.content.Context
 import androidx.room.Room
 import com.yusuf.drinkvibes.data.retrofit.api.BeveragesApi
 import com.yusuf.drinkvibes.data.retrofit.api.MoodsApi
-import com.yusuf.drinkvibes.data.retrofit.entity.Moods
 import com.yusuf.drinkvibes.data.retrofit.repository.BeveragesRepository
 import com.yusuf.drinkvibes.data.retrofit.repository.MoodsRepository
-import com.yusuf.drinkvibes.data.roomdb.Dao.Database
+import com.yusuf.drinkvibes.data.roomdb.Dao.FavouriteBeveragesDatabase
 import com.yusuf.drinkvibes.data.roomdb.Dao.FavouriteBeveragesDao
+import com.yusuf.drinkvibes.data.roomdb.entity.FavouriteBeverages
 import com.yusuf.drinkvibes.data.roomdb.repo.FavouriteBeveragesRepository
 import com.yusuf.drinkvibes.utils.Utils.Companion.BASE_URL
 import dagger.Module
@@ -18,7 +18,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.create
+
 import javax.inject.Singleton
 
 @Module
@@ -33,13 +33,12 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun provideFavouriteBeveragesDao(@ApplicationContext context: Context): FavouriteBeveragesDao{
-
-        val db = Room.databaseBuilder(context,Database::class.java,"beverages.sqlite")
-            .createFromAsset("beverages.sqlite").build()
-
-        return db.getFavouriteBeveragesDao()
-    }
+    fun provideFavouriteBeveragesDao(@ApplicationContext context: Context) = Room.databaseBuilder(
+        context,FavouriteBeveragesDatabase::class.java,"beverages"
+    )
+        .allowMainThreadQueries()
+        .fallbackToDestructiveMigration()
+        .build().getFavouriteBeveragesDao()
 
 
     @Provides
@@ -73,5 +72,6 @@ class AppModule {
             .build()
             .create(MoodsApi::class.java)
     }
+
 
 }
