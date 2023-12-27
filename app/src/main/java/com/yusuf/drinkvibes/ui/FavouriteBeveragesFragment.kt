@@ -5,24 +5,44 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProvider
 import com.yusuf.drinkvibes.R
+import com.yusuf.drinkvibes.data.roomdb.entity.FavouriteBeverages
+import com.yusuf.drinkvibes.databinding.FragmentFavouriteBeveragesBinding
+import com.yusuf.drinkvibes.ui.viewModel.BeveragesViewModel
+import com.yusuf.drinkvibes.ui.viewModel.FavouriteBeveragesViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class FavouriteBeveragesFragment : Fragment() {
 
+    private lateinit var binding: FragmentFavouriteBeveragesBinding
 
+    private lateinit var viewModel: FavouriteBeveragesViewModel
+
+    private lateinit var favBeveragesList: List<FavouriteBeverages>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_favourite_beverages, container, false)
+       binding = FragmentFavouriteBeveragesBinding.inflate(inflater,container,false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        viewModel = ViewModelProvider(this).get(FavouriteBeveragesViewModel::class.java)
 
+
+
+    }
+
+    fun observeData(){
+        viewModel.favouriteBeverages.observe(viewLifecycleOwner){
+            favBeveragesList
+        }
     }
 
 }

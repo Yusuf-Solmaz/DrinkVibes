@@ -1,8 +1,10 @@
 package com.yusuf.drinkvibes.data.retrofit.entity
 
+import androidx.room.Entity
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
+@Entity(tableName = "beverages")
 data class Beverages(
 
     @SerializedName("id")

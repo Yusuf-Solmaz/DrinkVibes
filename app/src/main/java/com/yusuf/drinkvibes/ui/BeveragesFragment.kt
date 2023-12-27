@@ -47,9 +47,6 @@ class BeveragesFragment : Fragment() {
         viewModel = ViewModelProvider(this).get(BeveragesViewModel::class.java)
 
 
-
-
-
     }
 
     override fun onResume() {
