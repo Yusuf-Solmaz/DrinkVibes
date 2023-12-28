@@ -71,7 +71,8 @@ class BeveragesViewModel @Inject constructor(val repo: BeveragesRepository,val f
 
     fun isFavouriteBeverage(query:String) {
         val isFavBeverage = favRepo.isFavourite(query)
-        isFavouriteBeverageLiveData.value = isFavBeverage.isEmpty()
+        Log.i("isFavResult",isFavBeverage.isEmpty().toString())
+        isFavouriteBeverageLiveData.value = isFavBeverage.isNotEmpty()
     }
 
     fun deleteFromFavourite(favbeverage: FavouriteBeverages){

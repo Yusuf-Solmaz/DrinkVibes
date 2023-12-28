@@ -54,15 +54,38 @@ class BeveragesFragment : Fragment() {
         viewModel.beverageList.observe(viewLifecycleOwner){
 
             val beverage = it[Random.nextInt(it.size)]
+            val favBeverage = FavouriteBeverages(beverage.id,beverage.beverageName,beverage.contents,beverage.imageUrl,beverage.mood,beverage.preparation,beverage.youtubeVideoId)
 
             binding.isFav.setOnClickListener {
                 val action = BeveragesFragmentDirections.actionBeveragesFragmentToFavouriteBeveragesFragment()
                 findNavController().navigate(action)
 
-                val favBeverage = FavouriteBeverages(beverage.id,beverage.beverageName,beverage.contents,beverage.imageUrl,beverage.mood,beverage.preparation,beverage.youtubeVideoId)
                 viewModel.saveFavBeverages(favBeverage)
                 Toast.makeText(context,"${beverage.beverageName} Added to Favourites", Toast.LENGTH_SHORT).show()
             }
+
+            viewModel.isFavouriteBeverage(beverage.beverageName)
+
+
+
+            viewModel.isFavouriteBeverageLiveData.observe(viewLifecycleOwner){
+                isChecked->
+                binding.checkBox.isChecked = isChecked
+
+                binding.checkBox.setOnCheckedChangeListener { checkBox, isChecked ->
+                    if (isChecked){
+                        Toast.makeText(context,"${beverage.beverageName} Added to Favourites", Toast.LENGTH_SHORT).show()
+                        viewModel.saveFavBeverages(favBeverage)
+
+                    }
+                    else{
+                        Toast.makeText(context,"${beverage.beverageName} Deleted to Favourites", Toast.LENGTH_SHORT).show()
+                        viewModel.deleteFromFavourite(favBeverage)
+                    }
+                }
+            }
+
+
 
             binding.beverageContents.text = beverage.contents
             binding.beveragePreparation.text = beverage.preparation
