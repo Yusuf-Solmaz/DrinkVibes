@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_moodsFragment_to_beveragesFragment"
             app:destination="@id/beveragesFragment" />
+        <action
+            android:id="@+id/action_moodsFragment_to_favouriteBeveragesFragment"
+            app:destination="@id/favouriteBeveragesFragment" />
     </fragment>
     <fragment
         android:id="@+id/beveragesFragment"
@@ -22,9 +25,6 @@
         <argument
             android:name="mood"
             app:argType="com.yusuf.drinkvibes.data.retrofit.entity.Moods" />
-        <action
-            android:id="@+id/action_beveragesFragment_to_favouriteBeveragesFragment"
-            app:destination="@id/favouriteBeveragesFragment" />
     </fragment>
     <fragment
         android:id="@+id/favouriteBeveragesFragment"

@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.yusuf.drinkvibes.R
@@ -62,6 +63,12 @@ class FavouriteBeveragesFragment : Fragment() {
                 binding.favBeveragesRecyclerView.adapter=adapter
             }
         }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        val navController = findNavController()
+        navController.popBackStack(R.id.favouriteBeveragesFragment, true)
     }
 
 }

@@ -15,6 +15,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.yusuf.drinkvibes.R
 
 import com.yusuf.drinkvibes.data.roomdb.entity.FavouriteBeverages
 import com.yusuf.drinkvibes.databinding.FragmentBeveragesBinding
@@ -28,6 +30,7 @@ class BeveragesFragment : Fragment() {
 
     private lateinit var binding: FragmentBeveragesBinding
     private lateinit var viewModel: BeveragesViewModel
+    private lateinit var bottomNavigationView: BottomNavigationView
 
 
     override fun onCreateView(
@@ -44,6 +47,9 @@ class BeveragesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        bottomNavigationView = requireActivity().findViewById(R.id.bottomNavigationMain)
+
+
         viewModel = ViewModelProvider(this).get(BeveragesViewModel::class.java)
 
 
@@ -56,13 +62,7 @@ class BeveragesFragment : Fragment() {
             val beverage = it[Random.nextInt(it.size)]
             val favBeverage = FavouriteBeverages(beverage.id,beverage.beverageName,beverage.contents,beverage.imageUrl,beverage.mood,beverage.preparation,beverage.youtubeVideoId)
 
-            binding.isFav.setOnClickListener {
-                val action = BeveragesFragmentDirections.actionBeveragesFragmentToFavouriteBeveragesFragment()
-                findNavController().navigate(action)
 
-                viewModel.saveFavBeverages(favBeverage)
-                Toast.makeText(context,"${beverage.beverageName} Added to Favourites", Toast.LENGTH_SHORT).show()
-            }
 
             viewModel.isFavouriteBeverage(beverage.beverageName)
 
@@ -115,11 +115,13 @@ class BeveragesFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-
-
-
+        bottomNavigationView.visibility = View.GONE
     }
 
 
+    override fun onPause() {
+        super.onPause()
+        bottomNavigationView.visibility = View.VISIBLE
+    }
 
 }
