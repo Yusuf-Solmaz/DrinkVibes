@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,75 +7,84 @@
     tools:context=".ui.BeveragesFragment">
 
 
-    <ImageView
-        android:id="@+id/beverageImageView"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_marginTop="84dp"
-        android:layout_marginEnd="48dp"
-        android:scaleType="centerCrop"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:src="@tools:sample/backgrounds/scenic" />
 
-    <TextView
-        android:id="@+id/beverageContents"
-        android:layout_width="114dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="148dp"
-        android:text="TextView"
-        app:layout_constraintEnd_toStartOf="@+id/beverageImageView"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/beveragePreparation"
-        android:layout_width="349dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="80dp"
-        android:paddingLeft="10dp"
-        android:text="Örnek İçerik"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/beverageImageView" />
+            <TextView
+                android:id="@+id/beverageContents"
+                android:layout_width="114dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="148dp"
+                android:text="TextView"
+                app:layout_constraintEnd_toStartOf="@+id/beverageImageView"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    <WebView
-        android:id="@+id/webView"
-        android:layout_width="312dp"
-        android:layout_height="210dp"
-        android:layout_marginTop="57dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/beveragePreparation" />
+            <WebView
+                android:id="@+id/webView"
+                android:layout_width="312dp"
+                android:layout_height="210dp"
 
-    <ImageView
-        android:id="@+id/isFav"
-        android:layout_width="46dp"
-        android:layout_height="36dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="48dp"
-        android:src="@drawable/un_favourite"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+                android:layout_marginTop="92dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/beveragePreparation" />
 
-    <CheckBox
+            <TextView
+                android:id="@+id/beveragePreparation"
+                android:layout_width="349dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="80dp"
+                android:paddingLeft="10dp"
+                android:text="Örnek İçerik"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.516"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/beverageImageView" />
 
-        android:button="@drawable/selector_wishlist_item"
-        android:id="@+id/checkBox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:buttonTint="@null"
-        />
+            <ImageView
+                android:id="@+id/beverageImageView"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_marginTop="148dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.81"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@tools:sample/backgrounds/scenic" />
+
+            <CheckBox
+
+                android:id="@+id/checkBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="48dp"
+                android:button="@drawable/selector_wishlist_item"
+                app:buttonTint="@null"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.634"
+                app:layout_constraintStart_toEndOf="@+id/isFav"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/isFav"
+                android:layout_width="46dp"
+                android:layout_height="36dp"
+                android:layout_marginTop="60dp"
+                android:src="@drawable/un_favourite"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+</ScrollView>
