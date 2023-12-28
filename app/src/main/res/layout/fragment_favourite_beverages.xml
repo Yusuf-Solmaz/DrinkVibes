@@ -7,22 +7,13 @@
     tools:context=".ui.FavouriteBeveragesFragment">
 
     <androidx.recyclerview.widget.RecyclerView
+        android:layout_marginTop="30dp"
         android:id="@+id/favBeveragesRecyclerView"
-        android:layout_width="409dp"
-        android:layout_height="729dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="364dp"
-        android:text="recyclerview"
-        app:layout_constraintBottom_toBottomOf="@+id/favBeveragesRecyclerView"
-        app:layout_constraintEnd_toEndOf="@+id/favBeveragesRecyclerView"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="@+id/favBeveragesRecyclerView" />
 </androidx.constraintlayout.widget.ConstraintLayout>

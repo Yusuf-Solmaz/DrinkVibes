@@ -35,6 +35,8 @@ class FavouriteBeveragesAdapter(val viewModel: FavouriteBeveragesViewModel,val c
         Glide.with(context)
             .load(favBeveragesList[position].imageUrl)
             // .placeholder(R.drawable.img)
+            .override(107, 58) // Örnek olarak genişlik: 500, yükseklik: 300
+            .centerCrop()
             .transition(DrawableTransitionOptions.withCrossFade())
             .into(holder.binding.imageView)
 

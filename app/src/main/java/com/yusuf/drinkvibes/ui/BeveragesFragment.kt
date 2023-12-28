@@ -21,6 +21,7 @@ import com.yusuf.drinkvibes.R
 import com.yusuf.drinkvibes.data.roomdb.entity.FavouriteBeverages
 import com.yusuf.drinkvibes.databinding.FragmentBeveragesBinding
 import com.yusuf.drinkvibes.ui.viewModel.BeveragesViewModel
+import com.yusuf.drinkvibes.utils.Utils.Companion.toFavBeverages
 import dagger.hilt.android.AndroidEntryPoint
 
 import kotlin.random.Random
@@ -60,7 +61,7 @@ class BeveragesFragment : Fragment() {
         viewModel.beverageList.observe(viewLifecycleOwner){
 
             val beverage = it[Random.nextInt(it.size)]
-            val favBeverage = FavouriteBeverages(beverage.id,beverage.beverageName,beverage.contents,beverage.imageUrl,beverage.mood,beverage.preparation,beverage.youtubeVideoId)
+            val favBeverage =beverage.toFavBeverages() //FavouriteBeverages(beverage.id,beverage.beverageName,beverage.contents,beverage.imageUrl,beverage.mood,beverage.preparation,beverage.youtubeVideoId)
 
 
 
