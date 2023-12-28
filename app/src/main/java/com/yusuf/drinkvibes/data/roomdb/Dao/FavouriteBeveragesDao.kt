@@ -19,4 +19,7 @@ interface FavouriteBeveragesDao {
 
     @Delete
     fun deleteFavouriteBeverage(beverages: FavouriteBeverages)
+
+    @Query("SELECT * FROM beverages WHERE beverageName = :searchString")
+    fun isFavouriteBeverage(searchString: String): List<FavouriteBeverages>
 }

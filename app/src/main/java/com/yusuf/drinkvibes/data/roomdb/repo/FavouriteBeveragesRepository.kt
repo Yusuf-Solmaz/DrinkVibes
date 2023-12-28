@@ -18,4 +18,8 @@ class FavouriteBeveragesRepository(var favBeveraegsDao: FavouriteBeveragesDao) {
         favBeveraegsDao.deleteFavouriteBeverage(favouriteBeverages)
     }
 
+    fun isFavourite(query:String) : List<FavouriteBeverages>{
+        return favBeveraegsDao.isFavouriteBeverage(query)
+    }
+
 }

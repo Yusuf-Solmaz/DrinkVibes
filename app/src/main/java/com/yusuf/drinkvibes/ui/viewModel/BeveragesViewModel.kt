@@ -18,6 +18,7 @@ class BeveragesViewModel @Inject constructor(val repo: BeveragesRepository,val f
 
     var beverageList = MutableLiveData<List<Beverages>>()
     var loading = MutableLiveData<Boolean>()
+    val isFavouriteBeverageLiveData =  MutableLiveData<Boolean>()
 
 
     fun getBeverages(moods: Moods) {
@@ -66,6 +67,15 @@ class BeveragesViewModel @Inject constructor(val repo: BeveragesRepository,val f
             favRepo.addFavouriteBeverage(favbeverage)
             Log.i("favBeverage",favbeverage.toString())
 
+    }
+
+    fun isFavouriteBeverage(query:String) {
+        val isFavBeverage = favRepo.isFavourite(query)
+        isFavouriteBeverageLiveData.value = isFavBeverage.isEmpty()
+    }
+
+    fun deleteFromFavourite(favbeverage: FavouriteBeverages){
+        favRepo.deleteBeverage(favbeverage)
     }
 }
 

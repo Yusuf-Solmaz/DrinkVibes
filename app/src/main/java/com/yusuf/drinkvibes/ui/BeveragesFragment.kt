@@ -6,24 +6,21 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.webkit.WebView
+
 import android.webkit.WebViewClient
 import android.widget.Toast
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModel
+
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
-import com.yusuf.drinkvibes.R
-import com.yusuf.drinkvibes.data.retrofit.entity.Moods
+
 import com.yusuf.drinkvibes.data.roomdb.entity.FavouriteBeverages
 import com.yusuf.drinkvibes.databinding.FragmentBeveragesBinding
 import com.yusuf.drinkvibes.ui.viewModel.BeveragesViewModel
-import com.yusuf.drinkvibes.ui.viewModel.MoodsViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlin.math.log
+
 import kotlin.random.Random
 
 @AndroidEntryPoint
@@ -50,12 +47,6 @@ class BeveragesFragment : Fragment() {
         viewModel = ViewModelProvider(this).get(BeveragesViewModel::class.java)
 
 
-
-    }
-
-    override fun onResume() {
-        super.onResume()
-
         val bundle : BeveragesFragmentArgs by navArgs()
         val mood = bundle.mood
         viewModel.getBeverages(mood)
@@ -79,7 +70,7 @@ class BeveragesFragment : Fragment() {
 
             Glide.with(requireContext())
                 .load(beverage.imageUrl)
-               // .placeholder(R.drawable.img)
+                // .placeholder(R.drawable.img)
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .into(binding.beverageImageView)
 
@@ -96,6 +87,13 @@ class BeveragesFragment : Fragment() {
             Log.i("beverage",it[Random.nextInt(it.size)].beverageName)
 
         }
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+
 
     }
 
