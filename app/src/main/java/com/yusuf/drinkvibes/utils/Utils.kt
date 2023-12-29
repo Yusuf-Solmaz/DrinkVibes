@@ -24,6 +24,10 @@ class Utils {
                 id, beverageName, contents, imageUrl, mood, preparation, youtubeVideoId
             )
         }
+
+        fun FavouriteBeverages.toBeverages(): Beverages{
+            return Beverages(id, beverageName, contents, imageUrl, mood, preparation, youtubeVideoId)
+        }
     }
 
 
