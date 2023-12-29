@@ -17,10 +17,13 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.yusuf.drinkvibes.R
+import com.yusuf.drinkvibes.data.retrofit.entity.Beverages
+import com.yusuf.drinkvibes.data.retrofit.entity.Moods
 
 import com.yusuf.drinkvibes.data.roomdb.entity.FavouriteBeverages
 import com.yusuf.drinkvibes.databinding.FragmentBeveragesBinding
 import com.yusuf.drinkvibes.ui.viewModel.BeveragesViewModel
+import com.yusuf.drinkvibes.utils.Utils.Companion.toBeverages
 import com.yusuf.drinkvibes.utils.Utils.Companion.toFavBeverages
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -41,8 +44,6 @@ class BeveragesFragment : Fragment() {
         binding = FragmentBeveragesBinding.inflate(inflater,container,false)
         return binding.root
 
-
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -56,62 +57,80 @@ class BeveragesFragment : Fragment() {
 
         val bundle : BeveragesFragmentArgs by navArgs()
         val mood = bundle.mood
+        val favBeverages = bundle.favBeverages
+
+        if (favBeverages==null){
+            observeMoodsData(mood!!)
+        }
+        else{
+
+            val beverages = favBeverages.toBeverages()
+
+            isFavControl(beverages)
+
+            uiControl(beverages)
+        }
+
+
+
+    }
+
+    private fun observeMoodsData(mood:Moods){
+
         viewModel.getBeverages(mood)
 
         viewModel.beverageList.observe(viewLifecycleOwner){
 
             val beverage = it[Random.nextInt(it.size)]
-            val favBeverage =beverage.toFavBeverages() //FavouriteBeverages(beverage.id,beverage.beverageName,beverage.contents,beverage.imageUrl,beverage.mood,beverage.preparation,beverage.youtubeVideoId)
 
+            isFavControl(beverage)
 
-
-            viewModel.isFavouriteBeverage(beverage.beverageName)
-
-
-
-            viewModel.isFavouriteBeverageLiveData.observe(viewLifecycleOwner){
-                isChecked->
-                binding.checkBox.isChecked = isChecked
-
-                binding.checkBox.setOnCheckedChangeListener { checkBox, isChecked ->
-                    if (isChecked){
-                        Toast.makeText(context,"${beverage.beverageName} Added to Favourites", Toast.LENGTH_SHORT).show()
-                        viewModel.saveFavBeverages(favBeverage)
-
-                    }
-                    else{
-                        Toast.makeText(context,"${beverage.beverageName} Deleted to Favourites", Toast.LENGTH_SHORT).show()
-                        viewModel.deleteFromFavourite(favBeverage)
-                    }
-                }
-            }
-
-
-
-            binding.beverageContents.text = beverage.contents
-            binding.beveragePreparation.text = beverage.preparation
-
-
-            Glide.with(requireContext())
-                .load(beverage.imageUrl)
-                // .placeholder(R.drawable.img)
-                .transition(DrawableTransitionOptions.withCrossFade())
-                .into(binding.beverageImageView)
-
-
-            binding.webView.webViewClient = WebViewClient()
-            binding.webView.settings.javaScriptEnabled = true
-            binding.webView.settings.domStorageEnabled = true
-
-
-            val videoId = beverage.youtubeVideoId
-            val embedHTML = "<html><body><iframe width=\"100%\" height=\"100%\" src=\"https://www.youtube.com/embed/$videoId\" frameborder=\"0\" allowfullscreen></iframe></body></html>"
-            binding.webView.loadData(embedHTML, "text/html", "utf-8")
-
-            Log.i("beverage",it[Random.nextInt(it.size)].beverageName)
+            uiControl(beverage)
 
         }
+    }
 
+
+
+    private fun isFavControl(beverage:Beverages){
+        viewModel.isFavouriteBeverage(beverage!!.beverageName)
+
+        viewModel.isFavouriteBeverageLiveData.observe(viewLifecycleOwner){
+                isChecked->
+            binding.checkBox.isChecked = isChecked
+
+            binding.checkBox.setOnCheckedChangeListener { checkBox, isChecked ->
+                if (isChecked){
+                    Toast.makeText(context,"${beverage.beverageName} Added to Favourites", Toast.LENGTH_SHORT).show()
+                    viewModel.saveFavBeverages(beverage.toFavBeverages())
+
+                }
+                else{
+                    Toast.makeText(context,"${beverage.beverageName} Deleted to Favourites", Toast.LENGTH_SHORT).show()
+                    viewModel.deleteFromFavourite(beverage.toFavBeverages())
+                }
+            }
+        }
+    }
+
+    private fun uiControl(beverage: Beverages){
+        binding.beverageContents.text = beverage.contents
+        binding.beveragePreparation.text = beverage.preparation
+
+
+        Glide.with(requireContext())
+            .load(beverage.imageUrl)
+            // .placeholder(R.drawable.img)
+            .transition(DrawableTransitionOptions.withCrossFade())
+            .into(binding.beverageImageView)
+
+        binding.webView.webViewClient = WebViewClient()
+        binding.webView.settings.javaScriptEnabled = true
+        binding.webView.settings.domStorageEnabled = true
+
+        val videoId = beverage.youtubeVideoId
+        val embedHTML = "<html><body><iframe width=\"100%\" height=\"100%\" src=\"https://www.youtube.com/embed/$videoId\" frameborder=\"0\" allowfullscreen></iframe></body></html>"
+        binding.webView.loadData(embedHTML, "text/html", "utf-8")
     }
 
     override fun onResume() {

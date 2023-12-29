@@ -4,12 +4,13 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.yusuf.drinkvibes.data.roomdb.entity.FavouriteBeverages
-import com.yusuf.drinkvibes.data.roomdb.repo.FavouriteBeveragesRepository
 import com.yusuf.drinkvibes.databinding.FavBeveragesRowBinding
+import com.yusuf.drinkvibes.ui.FavouriteBeveragesFragmentDirections
 import com.yusuf.drinkvibes.ui.viewModel.FavouriteBeveragesViewModel
 
 class FavouriteBeveragesAdapter(val viewModel: FavouriteBeveragesViewModel,val context: Context,val favBeveragesList:List<FavouriteBeverages>) :
@@ -35,7 +36,7 @@ class FavouriteBeveragesAdapter(val viewModel: FavouriteBeveragesViewModel,val c
         Glide.with(context)
             .load(favBeveragesList[position].imageUrl)
             // .placeholder(R.drawable.img)
-            .override(107, 58) // Örnek olarak genişlik: 500, yükseklik: 300
+            .override(107, 58)
             .centerCrop()
             .transition(DrawableTransitionOptions.withCrossFade())
             .into(holder.binding.imageView)
@@ -43,6 +44,11 @@ class FavouriteBeveragesAdapter(val viewModel: FavouriteBeveragesViewModel,val c
         holder.binding.deleteBeverageIcon.setOnClickListener {
             viewModel.deleteBeverage(favBeveragesList[position])
             Toast.makeText(context,"${favBeveragesList[position].beverageName} Deleted",Toast.LENGTH_SHORT).show()
+        }
+
+        holder.binding.cardView.setOnClickListener {
+            val action = FavouriteBeveragesFragmentDirections.actionFavouriteBeveragesFragmentToBeveragesFragment(favBeveragesList[position])
+            holder.binding.root.findNavController().navigate(action)
         }
     }
 }

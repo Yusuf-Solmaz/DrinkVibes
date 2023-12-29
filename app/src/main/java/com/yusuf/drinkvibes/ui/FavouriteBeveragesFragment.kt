@@ -49,6 +49,7 @@ class FavouriteBeveragesFragment : Fragment() {
         viewModel = ViewModelProvider(this).get(FavouriteBeveragesViewModel::class.java)
 
         viewModel.getAllFavouriteBeverages()
+
         observeData()
 
 
@@ -65,10 +66,5 @@ class FavouriteBeveragesFragment : Fragment() {
         }
     }
 
-    override fun onPause() {
-        super.onPause()
-        val navController = findNavController()
-        navController.popBackStack(R.id.favouriteBeveragesFragment, true)
-    }
 
 }

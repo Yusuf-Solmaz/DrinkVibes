@@ -12,7 +12,18 @@
         tools:layout="@layout/fragment_moods" >
         <action
             android:id="@+id/action_moodsFragment_to_beveragesFragment"
-            app:destination="@id/beveragesFragment" />
+            app:destination="@id/beveragesFragment" >
+            <argument
+                android:name="favBeverage"
+                android:defaultValue="@null"
+                app:argType="com.yusuf.drinkvibes.data.roomdb.entity.FavouriteBeverages"
+                app:nullable="true" />
+            <argument
+                android:name="favBeverages"
+                android:defaultValue="@null"
+                app:nullable="true"
+                app:argType="com.yusuf.drinkvibes.data.roomdb.entity.FavouriteBeverages" />
+        </action>
         <action
             android:id="@+id/action_moodsFragment_to_favouriteBeveragesFragment"
             app:destination="@id/favouriteBeveragesFragment" />
@@ -24,11 +35,26 @@
         tools:layout="@layout/fragment_beverages" >
         <argument
             android:name="mood"
-            app:argType="com.yusuf.drinkvibes.data.retrofit.entity.Moods" />
+            app:argType="com.yusuf.drinkvibes.data.retrofit.entity.Moods"
+            app:nullable="true" />
+        <argument
+            android:name="favBeverages"
+            app:argType="com.yusuf.drinkvibes.data.roomdb.entity.FavouriteBeverages"
+            app:nullable="true" />
     </fragment>
     <fragment
         android:id="@+id/favouriteBeveragesFragment"
         android:name="com.yusuf.drinkvibes.ui.FavouriteBeveragesFragment"
         android:label="fragment_favourite_beverages"
-        tools:layout="@layout/fragment_favourite_beverages" />
+        tools:layout="@layout/fragment_favourite_beverages" >
+        <action
+            android:id="@+id/action_favouriteBeveragesFragment_to_beveragesFragment"
+            app:destination="@id/beveragesFragment" >
+            <argument
+                android:name="mood"
+                android:defaultValue="@null"
+                app:argType="com.yusuf.drinkvibes.data.retrofit.entity.Moods"
+                app:nullable="true" />
+        </action>
+    </fragment>
 </navigation>

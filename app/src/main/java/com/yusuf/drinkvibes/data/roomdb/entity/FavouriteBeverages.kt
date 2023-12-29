@@ -30,4 +30,4 @@ data class FavouriteBeverages(
 
     @ColumnInfo(name = "youtubeVideoId")
     var youtubeVideoId: String =""
-)
+): Serializable
