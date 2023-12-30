@@ -2,4 +2,8 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="mainBackGround">#3F1D38</color>
+    <color name="tabBarColor">#A2678A</color>
+    <color name="moodsRowGround">#A2678A</color>
+    <color name="textColor">#FFF1F6</color>
 </resources>

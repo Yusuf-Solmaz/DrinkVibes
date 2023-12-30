@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity"
     android:id="@+id/constraintLayout"
+    android:background="@color/mainBackGround"
     >
 
 
@@ -32,7 +33,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/bottom_nav_menu" />
+        app:menu="@menu/bottom_nav_menu"
+        android:background="@color/tabBarColor"
+        app:itemIconTint="@color/mainBackGround"
+        />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
