@@ -1,17 +1,14 @@
 package com.yusuf.drinkvibes.ui
 
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
 import android.webkit.WebViewClient
+import android.widget.TextView
 import android.widget.Toast
-
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
@@ -19,14 +16,12 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.yusuf.drinkvibes.R
 import com.yusuf.drinkvibes.data.retrofit.entity.Beverages
 import com.yusuf.drinkvibes.data.retrofit.entity.Moods
-
-import com.yusuf.drinkvibes.data.roomdb.entity.FavouriteBeverages
 import com.yusuf.drinkvibes.databinding.FragmentBeveragesBinding
 import com.yusuf.drinkvibes.ui.viewModel.BeveragesViewModel
 import com.yusuf.drinkvibes.utils.Utils.Companion.toBeverages
 import com.yusuf.drinkvibes.utils.Utils.Companion.toFavBeverages
 import dagger.hilt.android.AndroidEntryPoint
-
+import io.github.muddz.styleabletoast.StyleableToast
 import kotlin.random.Random
 
 @AndroidEntryPoint
@@ -93,20 +88,22 @@ class BeveragesFragment : Fragment() {
 
 
     private fun isFavControl(beverage:Beverages){
-        viewModel.isFavouriteBeverage(beverage!!.beverageName)
+        viewModel.isFavouriteBeverage(beverage.beverageName)
 
         viewModel.isFavouriteBeverageLiveData.observe(viewLifecycleOwner){
                 isChecked->
             binding.checkBox.isChecked = isChecked
 
+
+
             binding.checkBox.setOnCheckedChangeListener { checkBox, isChecked ->
                 if (isChecked){
-                    Toast.makeText(context,"${beverage.beverageName} Added to Favourites", Toast.LENGTH_SHORT).show()
+                    StyleableToast.makeText(requireContext(), "${beverage.beverageName} Favorilere Eklendi", Toast.LENGTH_LONG, R.style.customToast).show();
                     viewModel.saveFavBeverages(beverage.toFavBeverages())
 
                 }
                 else{
-                    Toast.makeText(context,"${beverage.beverageName} Deleted to Favourites", Toast.LENGTH_SHORT).show()
+                    StyleableToast.makeText(requireContext(), "${beverage.beverageName} Favorilerden Çıkarıldı", Toast.LENGTH_LONG, R.style.customToast).show();
                     viewModel.deleteFromFavourite(beverage.toFavBeverages())
                 }
             }
@@ -117,6 +114,7 @@ class BeveragesFragment : Fragment() {
         binding.beverageContents.text = beverage.contents
         binding.beveragePreparation.text = beverage.preparation
 
+        binding.beverageName.text=beverage.beverageName
 
         Glide.with(requireContext())
             .load(beverage.imageUrl)

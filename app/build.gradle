@@ -86,7 +86,7 @@ dependencies {
     
     implementation "androidx.room:room-ktx:2.6.1"
 
-
+    implementation 'io.github.muddz:styleabletoast:2.4.0'
 }
 
 kapt {

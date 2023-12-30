@@ -8,10 +8,12 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.yusuf.drinkvibes.R
 import com.yusuf.drinkvibes.data.roomdb.entity.FavouriteBeverages
 import com.yusuf.drinkvibes.databinding.FavBeveragesRowBinding
 import com.yusuf.drinkvibes.ui.FavouriteBeveragesFragmentDirections
 import com.yusuf.drinkvibes.ui.viewModel.FavouriteBeveragesViewModel
+import io.github.muddz.styleabletoast.StyleableToast
 
 class FavouriteBeveragesAdapter(val viewModel: FavouriteBeveragesViewModel,val context: Context,val favBeveragesList:List<FavouriteBeverages>) :
     RecyclerView.Adapter<FavouriteBeveragesAdapter.FavouriteBeveragesHolder>() {
@@ -43,7 +45,8 @@ class FavouriteBeveragesAdapter(val viewModel: FavouriteBeveragesViewModel,val c
 
         holder.binding.deleteBeverageIcon.setOnClickListener {
             viewModel.deleteBeverage(favBeveragesList[position])
-            Toast.makeText(context,"${favBeveragesList[position].beverageName} Deleted",Toast.LENGTH_SHORT).show()
+            StyleableToast.makeText(context, "${favBeveragesList[position].beverageName} Favorilerden Silindi", Toast.LENGTH_LONG, R.style.customToast).show();
+
         }
 
         holder.binding.cardView.setOnClickListener {

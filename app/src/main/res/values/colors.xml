@@ -6,4 +6,5 @@
     <color name="tabBarColor">#A2678A</color>
     <color name="moodsRowGround">#A2678A</color>
     <color name="textColor">#FFF1F6</color>
+    <color name="beverageTitleColor">#E19898</color>
 </resources>
