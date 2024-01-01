@@ -5,7 +5,6 @@
     <string name="moodFragmentInfo">Ruh Halinizi Seçin</string>
 
 
-
     <style name="customToast">
 
         <item name="stTextColor">@color/textColor</item>
