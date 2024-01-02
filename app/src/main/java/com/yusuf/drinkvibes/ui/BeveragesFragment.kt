@@ -17,6 +17,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.yusuf.drinkvibes.R
 import com.yusuf.drinkvibes.data.retrofit.entity.Beverages
 import com.yusuf.drinkvibes.data.retrofit.entity.Moods
+import com.yusuf.drinkvibes.data.roomdb.entity.FavouriteBeverages
 import com.yusuf.drinkvibes.databinding.FragmentBeveragesBinding
 import com.yusuf.drinkvibes.ui.viewModel.BeveragesViewModel
 import com.yusuf.drinkvibes.utils.Utils.Companion.toBeverages
@@ -45,50 +46,53 @@ class BeveragesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setupViews()
+        setupViewModel()
+        observeArguments()
+
+    }
+
+    private fun setupViews() {
         bottomNavigationView = requireActivity().findViewById(R.id.bottomNavigationMain)
+    }
 
-
+    private fun setupViewModel() {
         viewModel = ViewModelProvider(this).get(BeveragesViewModel::class.java)
+    }
 
-
-        val bundle : BeveragesFragmentArgs by navArgs()
+    private fun observeArguments() {
+        val bundle: BeveragesFragmentArgs by navArgs()
         val mood = bundle.mood
         val favBeverages = bundle.favBeverages
 
-        if (favBeverages==null){
+        favBeverages?.let {
+            handleFavBeverage(it)
+        } ?: run {
             observeMoodsData(mood!!)
         }
-        else{
-
-            val beverages = favBeverages.toBeverages()
-
-            isFavControl(beverages)
-
-            uiControl(beverages)
-            binding.progressBarBeverages.visibility = ProgressBar.GONE
-        }
-
-
-
     }
 
-    private fun observeMoodsData(mood:Moods){
+    private fun handleFavBeverage(favBeverage: FavouriteBeverages) {
+        val beverage = favBeverage.toBeverages()
+        isFavControl(beverage)
+        uiControl(beverage)
+        binding.progressBarBeverages.visibility = ProgressBar.GONE
+    }
 
+    private fun observeMoodsData(mood: Moods) {
         viewModel.getBeverages(mood)
-
-        viewModel.beverageList.observe(viewLifecycleOwner){
-
-            beverageList->
-
-            val beverage = beverageList[Random.nextInt(beverageList.size)]
-
-            isFavControl(beverage)
-
-            uiControl(beverage)
-
+        viewModel.beverageList.observe(viewLifecycleOwner) { beverageList ->
+            handleRandomBeverage(beverageList)
         }
     }
 
+    private fun handleRandomBeverage(beverageList: List<Beverages>) {
+        val beverage = beverageList.randomOrNull()
+        beverage?.let {
+            isFavControl(it)
+            uiControl(it)
+        }
+    }
 
 
     private fun isFavControl(beverage:Beverages){
@@ -125,13 +129,14 @@ class BeveragesFragment : Fragment() {
             .transition(DrawableTransitionOptions.withCrossFade())
             .into(binding.beverageImageView)
 
+
         binding.webView.webViewClient = WebViewClient()
         binding.webView.settings.javaScriptEnabled = true
         binding.webView.settings.domStorageEnabled = true
 
         val videoId = beverage.youtubeVideoId
         val embedHTML = "<html><body><iframe width=\"100%\" height=\"100%\" src=\"https://www.youtube.com/embed/$videoId\" frameborder=\"0\" allowfullscreen></iframe></body></html>"
-        binding.webView.loadData(embedHTML, "text/html", "utf-8")
+       binding.webView.loadData(embedHTML, "text/html", "utf-8")
 
         viewModel.loading.observe(viewLifecycleOwner){
             if (it){

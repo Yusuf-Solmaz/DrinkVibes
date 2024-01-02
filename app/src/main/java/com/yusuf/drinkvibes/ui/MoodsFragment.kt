@@ -8,10 +8,7 @@ import android.view.ViewGroup
 import android.widget.ProgressBar
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.yusuf.drinkvibes.R
 import com.yusuf.drinkvibes.databinding.FragmentMoodsBinding
-import com.yusuf.drinkvibes.databinding.MoodsRowBinding
 import com.yusuf.drinkvibes.ui.adapter.MoodsAdapter
 import com.yusuf.drinkvibes.ui.viewModel.MoodsViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -20,10 +17,8 @@ import dagger.hilt.android.AndroidEntryPoint
 class MoodsFragment : Fragment() {
 
     private lateinit var binding: FragmentMoodsBinding
-
     private lateinit var adapter: MoodsAdapter
-
-    private lateinit var viewModel : MoodsViewModel
+    private val viewModel: MoodsViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,27 +28,10 @@ class MoodsFragment : Fragment() {
         return binding.root
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        val tempViewModel : MoodsViewModel by viewModels()
-        viewModel = tempViewModel
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        val layoutManager = GridLayoutManager(requireContext(),2)
-        binding.moodRecyclerView.layoutManager = layoutManager
-
-        viewModel.getAllMoods()
-
-
-
-        loadData()
-
-
-
+        setupRecyclerView()
+        observeData()
     }
 
     override fun onResume() {
@@ -61,34 +39,22 @@ class MoodsFragment : Fragment() {
         viewModel.getAllMoods()
     }
 
-    private fun loadData(){
-        viewModel.moodList.observe(viewLifecycleOwner){
-                moods->
-            moods?.let {
-                adapter = MoodsAdapter(viewModel,requireContext(),moods)
-                binding.moodRecyclerView.adapter = adapter
-            }
-        }
-
-        viewModel.moodList.observe(viewLifecycleOwner){
-                moods->
-            moods?.let {
-                adapter = MoodsAdapter(viewModel,requireContext(),moods)
-                binding.moodRecyclerView.adapter = adapter
-            }
-        }
-
-        viewModel.loading.observe(viewLifecycleOwner){
-                loading ->
-            if (loading){
-                binding.progressBar.visibility=ProgressBar.VISIBLE
-                binding.moodRecyclerView.visibility=RecyclerView.INVISIBLE
-            }
-            else{
-                binding.progressBar.visibility=ProgressBar.INVISIBLE
-                binding.moodRecyclerView.visibility=RecyclerView.VISIBLE
-            }
-        }
+    private fun setupRecyclerView() {
+        val layoutManager = GridLayoutManager(requireContext(), 2)
+        binding.moodRecyclerView.layoutManager = layoutManager
     }
 
+    private fun observeData() {
+        viewModel.moodList.observe(viewLifecycleOwner) { moods ->
+            moods?.let {
+                adapter = MoodsAdapter(viewModel, requireContext(), moods)
+                binding.moodRecyclerView.adapter = adapter
+            }
+        }
+
+        viewModel.loading.observe(viewLifecycleOwner) { loading ->
+            binding.progressBar.visibility = if (loading) ProgressBar.VISIBLE else ProgressBar.INVISIBLE
+            binding.moodRecyclerView.visibility = if (loading) View.INVISIBLE else View.VISIBLE
+        }
+    }
 }
