@@ -152,6 +152,7 @@ class BeveragesFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         bottomNavigationView.visibility = View.GONE
+
     }
 
 
