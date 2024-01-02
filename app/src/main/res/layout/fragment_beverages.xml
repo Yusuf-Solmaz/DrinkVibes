@@ -18,7 +18,7 @@
             android:layout_marginStart="32dp"
             android:layout_marginTop="208dp"
             android:fontFamily="@font/shadow"
-            android:text="TextView"
+
             android:textColor="@color/textColor"
             android:textSize="19sp"
             app:layout_constraintEnd_toStartOf="@+id/beverageImageView"
@@ -44,7 +44,7 @@
             android:layout_marginTop="92dp"
             android:fontFamily="@font/shadow"
             android:paddingLeft="10dp"
-            android:text="Örnek İçerik"
+
             android:textColor="@color/textColor"
             android:textSize="19sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -56,47 +56,46 @@
             android:id="@+id/beverageImageView"
             android:layout_width="200dp"
             android:layout_height="200dp"
-            android:layout_marginTop="148dp"
+            android:layout_marginTop="48dp"
             android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.81"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:src="@tools:sample/backgrounds/scenic" />
+            app:layout_constraintTop_toBottomOf="@+id/beverageName"
+             />
 
         <CheckBox
 
             android:id="@+id/checkBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="44dp"
-            android:layout_marginEnd="40dp"
+            android:layout_marginTop="48dp"
             android:button="@drawable/selector_wishlist_item"
             app:buttonTint="@null"
-            app:layout_constraintBottom_toBottomOf="@+id/beverageName"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.307" />
+            app:layout_constraintEnd_toStartOf="@+id/beverageName"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/beverageName"
-            android:layout_width="235dp"
+            android:layout_width="192dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="48dp"
-            android:layout_marginEnd="4dp"
             android:fontFamily="@font/lobster"
-            android:text="TextView"
+
             android:textColor="@color/textColor"
             android:textSize="38sp"
-            app:layout_constraintEnd_toStartOf="@+id/checkBox"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ProgressBar
-            android:visibility="gone"
             android:id="@+id/progressBarBeverages"
             style="?android:attr/progressBarStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:visibility="visible"
             app:layout_constraintBottom_toTopOf="@+id/webView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

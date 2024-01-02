@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebViewClient
+import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -64,6 +65,7 @@ class BeveragesFragment : Fragment() {
             isFavControl(beverages)
 
             uiControl(beverages)
+            binding.progressBarBeverages.visibility = ProgressBar.GONE
         }
 
 
@@ -76,7 +78,9 @@ class BeveragesFragment : Fragment() {
 
         viewModel.beverageList.observe(viewLifecycleOwner){
 
-            val beverage = it[Random.nextInt(it.size)]
+            beverageList->
+
+            val beverage = beverageList[Random.nextInt(beverageList.size)]
 
             isFavControl(beverage)
 
@@ -118,7 +122,6 @@ class BeveragesFragment : Fragment() {
 
         Glide.with(requireContext())
             .load(beverage.imageUrl)
-            // .placeholder(R.drawable.img)
             .transition(DrawableTransitionOptions.withCrossFade())
             .into(binding.beverageImageView)
 
@@ -129,6 +132,16 @@ class BeveragesFragment : Fragment() {
         val videoId = beverage.youtubeVideoId
         val embedHTML = "<html><body><iframe width=\"100%\" height=\"100%\" src=\"https://www.youtube.com/embed/$videoId\" frameborder=\"0\" allowfullscreen></iframe></body></html>"
         binding.webView.loadData(embedHTML, "text/html", "utf-8")
+
+        viewModel.loading.observe(viewLifecycleOwner){
+            if (it){
+                binding.progressBarBeverages.visibility=ProgressBar.VISIBLE
+            }
+            else{
+                binding.progressBarBeverages.visibility=ProgressBar.GONE
+
+            }
+        }
     }
 
     override fun onResume() {

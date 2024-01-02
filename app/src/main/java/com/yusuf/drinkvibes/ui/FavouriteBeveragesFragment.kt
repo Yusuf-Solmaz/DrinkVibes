@@ -25,6 +25,7 @@ class FavouriteBeveragesFragment : Fragment() {
 
     private lateinit var viewModel: FavouriteBeveragesViewModel
 
+
     private lateinit var adapter: FavouriteBeveragesAdapter
 
 

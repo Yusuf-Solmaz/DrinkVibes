@@ -12,6 +12,7 @@ import com.yusuf.drinkvibes.R
 import com.yusuf.drinkvibes.data.roomdb.entity.FavouriteBeverages
 import com.yusuf.drinkvibes.databinding.FavBeveragesRowBinding
 import com.yusuf.drinkvibes.ui.FavouriteBeveragesFragmentDirections
+import com.yusuf.drinkvibes.ui.viewModel.BeveragesViewModel
 import com.yusuf.drinkvibes.ui.viewModel.FavouriteBeveragesViewModel
 import io.github.muddz.styleabletoast.StyleableToast
 
@@ -37,7 +38,6 @@ class FavouriteBeveragesAdapter(val viewModel: FavouriteBeveragesViewModel,val c
 
         Glide.with(context)
             .load(favBeveragesList[position].imageUrl)
-            // .placeholder(R.drawable.img)
             .override(107, 58)
             .centerCrop()
             .transition(DrawableTransitionOptions.withCrossFade())
@@ -50,8 +50,9 @@ class FavouriteBeveragesAdapter(val viewModel: FavouriteBeveragesViewModel,val c
         }
 
         holder.binding.cardView.setOnClickListener {
-            val action = FavouriteBeveragesFragmentDirections.actionFavouriteBeveragesFragmentToBeveragesFragment(favBeveragesList[position])
-            holder.binding.root.findNavController().navigate(action)
+                val action = FavouriteBeveragesFragmentDirections.actionFavouriteBeveragesFragmentToBeveragesFragment(favBeveragesList[position])
+                holder.binding.root.findNavController().navigate(action)
+
         }
     }
 }

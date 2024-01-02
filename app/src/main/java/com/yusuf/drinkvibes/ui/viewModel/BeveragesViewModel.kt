@@ -28,34 +28,42 @@ class BeveragesViewModel @Inject constructor(val repo: BeveragesRepository,val f
 
                 "Mutlu" -> {
                     beverageList.value = repo.api.getAllHappyBeverages()
+                    loading.value = false
                 }
 
                 "Hüzünlü" -> {
                     beverageList.value = repo.api.getAllSadBeverages()
+                    loading.value = false
                 }
 
                 "Enerjik" -> {
                     beverageList.value = repo.api.getAllEnergeticBeverages()
+                    loading.value = false
                 }
 
                 "Romantik" -> {
                     beverageList.value = repo.api.getAllRomanticBeverages()
+                    loading.value = false
                 }
 
                 "Stresli" -> {
                     beverageList.value = repo.api.getAllStressfulBeverages()
+                    loading.value = false
                 }
 
                 "Rahat" -> {
                     beverageList.value = repo.api.getAllComfortableBeverages()
+                    loading.value = false
                 }
 
                 "Yorgun" -> {
                     beverageList.value = repo.api.getAllTiredBeverages()
+                    loading.value = false
                 }
 
                 "Heyecanlı" -> {
                     beverageList.value = repo.api.getAllExcitedBeverages()
+                    loading.value = false
                 }
 
             }
