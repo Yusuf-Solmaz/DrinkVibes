@@ -18,7 +18,7 @@
 </table>
 
 
-![ezgif com-overlay](https://github.com/Yusuf-Solmaz/DrinkVibes/assets/83172478/cd4ddfa0-a4ba-4a32-b6e0-fab986fb64c6)
+<img src="https://github.com/Yusuf-Solmaz/DrinkVibes/assets/83172478/cd4ddfa0-a4ba-4a32-b6e0-fab986fb64c6" alt="Description" width="300" heightt="450">
 
 
 
