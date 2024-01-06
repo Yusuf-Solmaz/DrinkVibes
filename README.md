@@ -18,6 +18,11 @@
 </table>
 
 
+![ezgif com-overlay](https://github.com/Yusuf-Solmaz/DrinkVibes/assets/83172478/cd4ddfa0-a4ba-4a32-b6e0-fab986fb64c6)
+
+
+
+
 ## Dependencies Used
 
 * [Dependency injection-Hilt](https://developer.android.com/training/dependency-injection/hilt-android)
