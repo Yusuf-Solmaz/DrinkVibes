@@ -1,6 +1,6 @@
 # An app that recommends drinks based on your daily mood.
 
-Choose your daily mood and get your drink recommendation. If you like the drink, you can add it to your favorites. You can find your favorite drink in my favorites and remove it from favorites if you want.
+### Choose your daily mood and get your drink recommendation. If you like the drink, you can add it to your favorites. You can find your favorite drink in my favorites and remove it from favorites if you want.
 
 
 <table>
