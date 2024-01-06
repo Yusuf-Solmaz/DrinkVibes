@@ -5,10 +5,15 @@ Choose your daily mood and get your drink recommendation. If you like the drink,
 
 <table>
   <tr>
+    <td><img src="https://github.com/Yusuf-Solmaz/DrinkVibes/assets/83172478/5b125d00-a91c-4527-993b-a5a694dda816" alt="Image 1"></td>
+    <td><img src="https://github.com/Yusuf-Solmaz/DrinkVibes/assets/83172478/3266b2d5-1e00-4fab-a7ee-f7b3ca4c9e04" alt="Image 2"></td>
+  </tr>
+</table>
+
+<table>
+  <tr>
     <td><img src="https://github.com/Yusuf-Solmaz/DrinkVibes/assets/83172478/80c7186f-38ea-42da-ad11-55df3c501d84" alt="Image 1"></td>
     <td><img src="https://github.com/Yusuf-Solmaz/DrinkVibes/assets/83172478/c96a315f-8bbf-49e2-8c2d-38f3ccce27e0" alt="Image 2"></td>
-    <td><img src="https://github.com/Yusuf-Solmaz/DrinkVibes/assets/83172478/3266b2d5-1e00-4fab-a7ee-f7b3ca4c9e04" alt="Image 3"></td>
-    <td><img src="https://github.com/Yusuf-Solmaz/DrinkVibes/assets/83172478/5b125d00-a91c-4527-993b-a5a694dda816" alt="Image 4"></td>
   </tr>
 </table>
 
