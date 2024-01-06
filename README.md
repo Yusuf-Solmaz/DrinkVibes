@@ -2,6 +2,7 @@
 
 ####  Choose your daily mood and get your drink recommendation. If you like the drink, you can add it to your favorites. You can find your favorite drink in my favorites and remove it from favorites if you want.
 
+## Screenshots
 
 <table>
   <tr>
@@ -17,6 +18,7 @@
   </tr>
 </table>
 
+## Usage Video
 
 <img src="https://github.com/Yusuf-Solmaz/DrinkVibes/assets/83172478/cd4ddfa0-a4ba-4a32-b6e0-fab986fb64c6" alt="Description" width="300" heightt="450">
 
