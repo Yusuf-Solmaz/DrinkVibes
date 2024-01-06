@@ -12,7 +12,7 @@ Choose your daily mood and get your drink recommendation. If you like the drink,
 
 <table>
   <tr>
-    <td><img src="https://github.com/Yusuf-Solmaz/DrinkVibes/assets/83172478/c96a315f-8bbf-49e2-8c2d-38f3ccce27e0" alt="Image 1"></td>
+    <td><img src="https://github.com/Yusuf-Solmaz/DrinkVibes/assets/83172478/90ccb36f-df52-4d9c-b4c3-6a3857176f4f" alt="Image 1"></td>
     <td><img src="https://github.com/Yusuf-Solmaz/DrinkVibes/assets/83172478/ecfe3bea-4ed6-4f5e-b5f6-e414a8704851" alt="Image 2"></td>
   </tr>
 </table>
